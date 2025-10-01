@@ -1,0 +1,192 @@
+🌾 FarmChainX Backend
+
+A Spring Boot Backend Application for the FarmChainX Supply Chain Management System, ensuring transparency, traceability, and trust in the agricultural supply chain.
+
+🚀 Features
+
+🔐 User Authentication: Secure JWT-based authentication with role-based access control
+
+👥 User Management: Role-specific registration & login for:
+
+Farmer
+
+Distributor
+
+Retailer
+
+Consumer
+
+Admin
+
+🌱 Crop Management: CRUD operations with supply chain traceability
+
+🔗 Supply Chain Tracking: Complete journey visibility from farm → distributor → retailer → consumer
+
+📦 QR Code Integration: Scan & retrieve public crop details instantly
+
+💾 SQL Server Integration: Persistent storage with Spring Data JPA & Hibernate
+
+🔒 Security: BCrypt password hashing, JWT validation & CORS-friendly API
+
+📦 Tech Stack
+
+Backend Framework: Spring Boot 3.2.0
+
+Security: Spring Security 6, JWT
+
+Database: SQL Server (Local / Azure SQL)
+
+ORM: Spring Data JPA + Hibernate
+
+Validation: Bean Validation
+
+Build Tool: Maven 3.6+
+
+Testing: JUnit & Spring Boot Test
+
+⚙️ Prerequisites
+
+Make sure you have the following installed:
+
+Java 17+
+
+Maven 3.6+
+
+SQL Server (local or Azure SQL Database)
+
+🗄️ Database Setup
+
+Install SQL Server (or use Azure SQL Database)
+
+Create a database:
+
+CREATE DATABASE farmchainx;
+
+
+Update application.yml with your DB credentials:
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=farmchainx;encrypt=true;trustServerCertificate=true
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:your_password}
+
+🔑 Environment Variables
+
+Set the following environment variables before running the application:
+
+Variable	Description	Default
+DB_USERNAME	SQL Server username	sa
+DB_PASSWORD	SQL Server password	-
+JWT_SECRET	Secret key for JWT token signing	-
+▶️ Running the Application
+
+Clone and run locally:
+
+# Clone repository
+git clone https://github.com/your-username/FarmChainXBackend.git
+
+# Navigate to project
+cd FarmChainXBackend
+
+# Run with Maven
+mvn spring-boot:run
+
+
+The application will start at:
+👉 http://localhost:8080/api
+
+📡 API Endpoints
+🔐 Authentication
+Method	Endpoint	Description
+POST	/api/auth/signin	User login
+POST	/api/auth/signup	User registration
+🌱 Crops (Protected)
+Method	Endpoint	Description
+GET	/api/crops	Get user’s crops
+POST	/api/crops	Add new crop
+PUT	/api/crops/{id}	Update crop
+DELETE	/api/crops/{id}	Delete crop
+GET	/api/crops/farmer/{farmerId}	Crops by Farmer ID
+GET	/api/crops/distributor/{distributorId}	Crops by Distributor ID
+📷 QR Code Scanning
+Method	Endpoint	Description
+GET	/api/crops/scan/{cropId}	Get crop details (public access)
+🛢️ Database Schema
+👥 Users Table
+
+id (PK)
+
+email (Unique)
+
+password (Encrypted with BCrypt)
+
+name
+
+location
+
+role (FARMER, DISTRIBUTOR, RETAILER, CONSUMER, ADMIN)
+
+farmer_id / distributor_id (unique 3-digit IDs)
+
+created_at, updated_at
+
+🌱 Crops Table
+
+id (PK)
+
+name, crop_type
+
+harvest_date, expiry_date
+
+soil_type, pesticides_used
+
+image_url
+
+user_id (FK → Users)
+
+supply chain tracking fields
+
+created_at, updated_at
+
+🛡️ Security
+
+JWT Authentication
+
+BCrypt Password Encryption
+
+Role-based Access Control (RBAC)
+
+CORS Configured for frontend integration
+
+🧪 Testing
+
+Run tests with:
+
+mvn test
+
+📦 Production Build
+
+Generate a JAR:
+
+mvn clean package
+
+
+Deploy the JAR (from target/) on any server with Java 17+.
+
+🤝 Contribution
+
+Fork the repo
+
+Create your feature branch (git checkout -b feature/awesome-feature)
+
+Commit changes (git commit -m 'Add awesome feature')
+
+Push to branch (git push origin feature/awesome-feature)
+
+Create a Pull Request
+
+📜 License
+
+This project is licensed under the MIT License – see the LICENSE
+ file for details.
